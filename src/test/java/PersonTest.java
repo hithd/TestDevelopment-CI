@@ -41,11 +41,11 @@ public class PersonTest {
         }
     }
 
-//    @Test(expected = IllegalStateException.class)
-//    public void testMissingFields() {
-//        Person person = new PersonImpl();
-//        person.validatePersonFields();
-//    }
+    @Test(expected = IllegalStateException.class)
+    public void testMissingFields() {
+        Person person = new PersonImpl();
+        person.validatePersonFields();
+    }
 
     @Test
     public void testToString() {
