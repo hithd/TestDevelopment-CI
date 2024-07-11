@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.sql.Timestamp;
-
+//修复build中缺失测试问题
 public class TicketCollectionTest {
 
     @Test
