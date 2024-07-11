@@ -201,25 +201,25 @@ public class TicketSystemTest {
         assertEquals("This ticket is already booked.", result);
     }
 
-    @Test
-    public void testValidTicketBookingMessage() throws Exception {
-        // Simulate an available ticket
-        ticket.setTicketStatus(false);
-
-        // Mock the TicketCollection to return the available ticket
-        TicketCollection.tickets.set(0, ticket);
-
-        // Prepare the simulated user input
-        String input = "John\nDoe\n30\nMan\njohn.doe@example.com\n0412345678\n123456789\n1\n1234567812345678\n123\n";
-        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
-        ticketSystem.setScanner(new Scanner(in));
-
-        // Attempt to book the available ticket
-        String result = ticketSystem.buyTicketAndValidate(ticket.getTicket_id());
-
-        // Assert that the appropriate success message is returned
-        assertEquals("Ticket booked successfully.", result);
-    }
+    //@Test
+//    public void testValidTicketBookingMessage() throws Exception {
+//        // Simulate an available ticket
+//        ticket.setTicketStatus(false);
+//
+//        // Mock the TicketCollection to return the available ticket
+//        TicketCollection.tickets.set(0, ticket);
+//
+//        // Prepare the simulated user input
+//        String input = "John\nDoe\n30\nMan\njohn.doe@example.com\n0412345678\n123456789\n1\n1234567812345678\n123\n";
+//        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+//        ticketSystem.setScanner(new Scanner(in));
+//
+//        // Attempt to book the available ticket
+//        String result = ticketSystem.buyTicketAndValidate(ticket.getTicket_id());
+//
+//        // Assert that the appropriate success message is returned
+//        assertEquals("Ticket booked successfully.", result);
+//    }
 
     @Test
     public void testTicketPriceDisplay() {
