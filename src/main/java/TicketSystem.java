@@ -1,4 +1,4 @@
-
+//The author of this module code is Kaihua Tian
 
 import java.util.Scanner;
 import java.util.regex.PatternSyntaxException;
@@ -311,6 +311,9 @@ public class TicketSystem<T> {
         return (int) ticket.getPrice();
     }
 
+    public boolean MakeDifferenceToAddAnnotation() {
+        return true;
+    }
     public void setScanner(Scanner scanner) {
         this.in = scanner;
     }
