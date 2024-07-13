@@ -55,7 +55,7 @@ public class Passenger extends Person {
 
     public void setPassport(String passport) {
         if (passport.length() > 9) {
-            throw new IllegalArgumentException("Passport number cannot be more than 9 characters long.");
+            throw new IllegalArgumentException("Passport number cannot be more than 9 characters.");
         }
         this.passport = passport;
     }

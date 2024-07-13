@@ -1,3 +1,4 @@
+//为了测试person抽象函数所做的继承
 public class PersonImpl extends Person {
     public PersonImpl() {
         super();

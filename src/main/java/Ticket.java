@@ -5,6 +5,7 @@ public class Ticket {
     private boolean classVip;
     private boolean status;
     Passenger passenger;
+    //将tax_rate独立出来便于修改
     private static final double SERVICE_TAX_RATE = 0.12;
 
     public Ticket(int ticket_id, double price, Flight flight, boolean classVip, Passenger passenger) {
@@ -43,9 +44,9 @@ public class Ticket {
 
     public void saleByAge(int age) {
         if (age < 15) {
-            price -= price * 0.5; // 50% sale for children under 15
+            price -= price * 0.5; // 50%  under 15
         } else if (age >= 60) {
-            price = 0; // 100% sale for elder people
+            price = 0; // 100%  elder people
         }
     }
 
@@ -85,7 +86,7 @@ public class Ticket {
         this.passenger = passenger;
     }
 
-    // New method to get explicit 'True' or 'False' status
+    // A New method to get explicit 'True' or 'False' status
     public String getExplicitStatus() {
         return status ? "True" : "False";
     }
