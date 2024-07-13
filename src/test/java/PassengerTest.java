@@ -31,7 +31,7 @@ public class PassengerTest {
 
     @Test
     public void testValidPhoneNumbers() {
-        String[] validNumbers = {"0412345678", "0512345678", "+61 123 345 678"};
+        String[] validNumbers = {"0412345678", "0512345678", "+61 423 345 678"};
         for (String number : validNumbers) {
             Passenger passenger = new Passenger("Michael", "Jackson", 30, "Man", "Michael@qq.com", number, "A1234567", "1234567890", 123);
             assertEquals(number, passenger.getPhoneNumber());
