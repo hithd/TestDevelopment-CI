@@ -1,4 +1,3 @@
-//The author of this module code is Xinghui Huang
 public class PersonImpl extends Person {
     public PersonImpl() {
         super();

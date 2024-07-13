@@ -1,3 +1,5 @@
+//The author of this module code is Xinghui Huang
+
 public class Ticket {
     private int ticketId;
     private double price;
