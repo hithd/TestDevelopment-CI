@@ -53,6 +53,7 @@ public class TicketCollectionTest {
 
     @Test
     public void testValidateTicket() {
+
         Passenger passenger1 = new Passenger("John", "Doe", 30, "Man", "john.doe@example.com", "0412345678", "P12345", "1234567890123456", 123);
 
         Timestamp dateFrom = new Timestamp(System.currentTimeMillis());
