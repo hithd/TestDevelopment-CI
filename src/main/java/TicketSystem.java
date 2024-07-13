@@ -311,6 +311,9 @@ public class TicketSystem<T> {
         return (int) ticket.getPrice();
     }
 
+    public boolean MakeDifferenceToAddAnnotation() {
+        return true;
+    }
     public void setScanner(Scanner scanner) {
         this.in = scanner;
     }
