@@ -10,8 +10,8 @@ public class TicketCollectionTest {
     @Test
     public void testAddTickets() {
         ArrayList<Ticket> tickets_db = new ArrayList<>();
-        Passenger passenger1 = new Passenger("John", "Doe", 30, "Man", "john.doe@example.com", "0512345678", "P12345", "1234567890123456", 123);
-        Passenger passenger2 = new Passenger("Jane", "Smith", 12, "Woman", "jane.smith@example.com", "0587654321", "P54321", "6543210987654321", 321);
+        Passenger passenger1 = new Passenger("Kah", "Ronaldo", 30, "Man", "Kah.Ronaldo@example.com", "0512345678", "P12345", "1234567890123456", 123);
+        Passenger passenger2 = new Passenger("Yossy", "Leo", 12, "Woman", "Yossy.Leo@example.com", "0587654321", "P54321", "6543210987654321", 321);
 
         Timestamp dateFrom = new Timestamp(System.currentTimeMillis());
         Timestamp dateTo = new Timestamp(System.currentTimeMillis() + 3600 * 1000);
@@ -32,7 +32,7 @@ public class TicketCollectionTest {
 
     @Test
     public void testGetTicketInfo() {
-        Passenger passenger1 = new Passenger("John", "Doe", 30, "Man", "john.doe@example.com", "0412345678", "P12345", "1234567890123456", 123);
+        Passenger passenger1 = new Passenger("Kah", "Ronaldo", 30, "Man", "Kah.Ronaldo@example.com", "0412345678", "P12345", "1234567890123456", 123);
 
         Timestamp dateFrom = new Timestamp(System.currentTimeMillis());
         Timestamp dateTo = new Timestamp(System.currentTimeMillis() + 3600 * 1000);
@@ -54,7 +54,7 @@ public class TicketCollectionTest {
     @Test
     public void testValidateTicket() {
 
-        Passenger passenger1 = new Passenger("John", "Doe", 30, "Man", "john.doe@example.com", "0412345678", "P12345", "1234567890123456", 123);
+        Passenger passenger1 = new Passenger("Kah", "Ronaldo", 30, "Man", "Kah.Ronaldo@example.com", "0412345678", "P12345", "1234567890123456", 123);
 
         Timestamp dateFrom = new Timestamp(System.currentTimeMillis());
         Timestamp dateTo = new Timestamp(System.currentTimeMillis() + 3600 * 1000);
