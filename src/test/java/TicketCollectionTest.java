@@ -1,9 +1,10 @@
+//The author of this module code is Kaihua Tian
 
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.sql.Timestamp;
-//修复build中缺失测试问题
+
 public class TicketCollectionTest {
 
     @Test
@@ -52,6 +53,7 @@ public class TicketCollectionTest {
 
     @Test
     public void testValidateTicket() {
+
         Passenger passenger1 = new Passenger("John", "Doe", 30, "Man", "john.doe@example.com", "0412345678", "P12345", "1234567890123456", 123);
 
         Timestamp dateFrom = new Timestamp(System.currentTimeMillis());
