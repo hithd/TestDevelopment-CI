@@ -7,38 +7,38 @@ public class PersonTest {
 
     @Test
     public void testValidPerson() {
-        Person person = new PersonImpl("John", "Doe", 30, "Man");
-        assertEquals("John", person.getFirstName());
-        assertEquals("Doe", person.getSecondName());
+        Person person = new PersonImpl("Jerry", "Smith", 30, "Man");
+        assertEquals("Jerry", person.getFirstName());
+        assertEquals("Smith", person.getSecondName());
         assertEquals(30, person.getAge());
         assertEquals("Man", person.getGender());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidFirstName() {
-        new PersonImpl("123John", "Doe", 30, "Man");
+        new PersonImpl("1Jerry", "Smith", 30, "Man");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidSecondName() {
-        new PersonImpl("John", "Doe123", 30, "Man");
+        new PersonImpl("Jerry", "Smith3", 30, "Man");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidAge() {
-        new PersonImpl("John", "Doe", -1, "Man");
+        new PersonImpl("Jerry", "Smith", -1, "Man");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidGender() {
-        new PersonImpl("John", "Doe", 30, "Invalid");
+        new PersonImpl("Smith", "Smith", 30, "Male");
     }
 
     @Test
     public void testValidGenders() {
         String[] validGenders = {"Woman", "Man", "Non-binary | gender diverse", "Prefer not to say", "Other"};
         for (String gender : validGenders) {
-            Person person = new PersonImpl("John", "Doe", 30, gender);
+            Person person = new PersonImpl("Jerry", "Smith", 30, gender);
             assertEquals(gender, person.getGender());
         }
     }
@@ -51,31 +51,31 @@ public class PersonTest {
 
     @Test
     public void testToString() {
-        Person person = new PersonImpl("John", "Doe", 30, "Man");
-        String expected = "Person{firstName='John', secondName='Doe', age=30, gender='Man'}";
+        Person person = new PersonImpl("Jerry", "Smith", 30, "Man");
+        String expected = "Person{firstName='Jerry', secondName='Smith', age=30, gender='Man'}";
         assertEquals(expected, person.toString());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testFirstNameWithSymbols() {
-        new PersonImpl("John@", "Doe", 30, "Man");
+        new PersonImpl("John@", "Bond", 30, "Man");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testSecondNameWithSymbols() {
-        new PersonImpl("John", "Doe!", 30, "Man");
+        new PersonImpl("John", "Bond!", 30, "Man");
     }
 
     @Test
     public void testSetters() {
         Person person = new PersonImpl();
         person.setFirstName("Jane");
-        person.setSecondName("Smith");
+        person.setSecondName("Bond");
         person.setAge(25);
         person.setGender("Woman");
 
         assertEquals("Jane", person.getFirstName());
-        assertEquals("Smith", person.getSecondName());
+        assertEquals("Bond", person.getSecondName());
         assertEquals(25, person.getAge());
         assertEquals("Woman", person.getGender());
     }

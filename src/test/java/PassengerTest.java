@@ -7,12 +7,12 @@ public class PassengerTest {
 
     @Test
     public void testValidPassenger() {
-        Passenger passenger = new Passenger("John", "Doe", 30, "Man", "john@example.com", "0412345678", "A1234567", "1234567890", 123);
-        assertEquals("John", passenger.getFirstName());
-        assertEquals("Doe", passenger.getSecondName());
+        Passenger passenger = new Passenger("Michael", "Jackson", 30, "Man", "Michael@qq.com", "0412345678", "A1234567", "1234567890", 123);
+        assertEquals("Michael", passenger.getFirstName());
+        assertEquals("Jackson", passenger.getSecondName());
         assertEquals(30, passenger.getAge());
         assertEquals("Man", passenger.getGender());
-        assertEquals("john@example.com", passenger.getEmail());
+        assertEquals("Michael@qq.com", passenger.getEmail());
         assertEquals("0412345678", passenger.getPhoneNumber());
         assertEquals("A1234567", passenger.getPassport());
         assertEquals("1234567890", passenger.getCardNumber());
@@ -21,26 +21,26 @@ public class PassengerTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidEmail() {
-        new Passenger("John", "Doe", 30, "Man", "invalid-email", "0412345678", "A1234567", "1234567890", 123);
+        new Passenger("Michael", "Jackson", 30, "Man", "Michael", "0412345678", "A1234567", "1234567890", 123);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidPhoneNumber() {
-        new Passenger("John", "Doe", 30, "Man", "john@example.com", "1234567890", "A1234567", "1234567890", 123);
+        new Passenger("Michael", "Jackson", 30, "Man", "Michael@qq.com", "123456557890", "A1234567", "1234567890", 123);
     }
 
     @Test
     public void testValidPhoneNumbers() {
-        String[] validNumbers = {"0412345678", "0512345678", "+61 412 345 678"};
+        String[] validNumbers = {"0412345678", "0512345678", "+61 123 345 678"};
         for (String number : validNumbers) {
-            Passenger passenger = new Passenger("John", "Doe", 30, "Man", "john@example.com", number, "A1234567", "1234567890", 123);
+            Passenger passenger = new Passenger("Michael", "Jackson", 30, "Man", "Michael@qq.com", number, "A1234567", "1234567890", 123);
             assertEquals(number, passenger.getPhoneNumber());
         }
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidPassportLength() {
-        new Passenger("John", "Doe", 30, "Man", "john@example.com", "0412345678", "A123456789", "1234567890", 123);
+        new Passenger("Michael", "Jackson", 30, "Man", "Michael@qq.com", "0412345678", "A12345006789", "1234567890", 123);
     }
 
     @Test(expected = IllegalStateException.class)
@@ -51,52 +51,52 @@ public class PassengerTest {
 
     @Test
     public void testToString() {
-        Passenger passenger = new Passenger("John", "Doe", 30, "Man", "john@example.com", "0412345678", "A1234567", "1234567890", 123);
-        String expected = "Passenger{ Fullname= John Doe ,email='john@example.com', phoneNumber='0412345678', passport='A1234567', cardNumber='1234567890', securityCode=123}";
+        Passenger passenger = new Passenger("Michael", "Jackson", 30, "Man", "Michael@qq.com", "0412345678", "A1234567", "1234567890", 123);
+        String expected = "Passenger{ Fullname= Michael Jackson ,email='Michael@qq.com', phoneNumber='0412345678', passport='A1234567', cardNumber='1234567890', securityCode=123}";
         assertEquals(expected, passenger.toString());
     }
 
     @Test
     public void testSetters() {
         Passenger passenger = new Passenger();
-        passenger.setFirstName("Jane");
-        passenger.setSecondName("Smith");
+        passenger.setFirstName("Michael");
+        passenger.setSecondName("Jackson");
         passenger.setAge(25);
         passenger.setGender("Woman");
-        passenger.setEmail("jane@example.com");
+        passenger.setEmail("Michael@qq.com");
         passenger.setPhoneNumber("0423456789");
         passenger.setPassport("B1234567");
-        passenger.setCardNumber("9876543210");
-        passenger.setSecurityCode(456);
+        passenger.setCardNumber("9876545555");
+        passenger.setSecurityCode(4561);
 
-        assertEquals("Jane", passenger.getFirstName());
-        assertEquals("Smith", passenger.getSecondName());
+        assertEquals("Michael", passenger.getFirstName());
+        assertEquals("Jackson", passenger.getSecondName());
         assertEquals(25, passenger.getAge());
         assertEquals("Woman", passenger.getGender());
-        assertEquals("jane@example.com", passenger.getEmail());
+        assertEquals("Michael@qq.com", passenger.getEmail());
         assertEquals("0423456789", passenger.getPhoneNumber());
         assertEquals("B1234567", passenger.getPassport());
-        assertEquals("9876543210", passenger.getCardNumber());
-        assertEquals(456, passenger.getSecurityCode());
+        assertEquals("9876545555", passenger.getCardNumber());
+        assertEquals(4561, passenger.getSecurityCode());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidFirstName() {
-        new Passenger("John123", "Doe", 30, "Man", "john@example.com", "0412345678", "A1234567", "1234567890", 123);
+        new Passenger("Michael123", "Pig", 30, "Man", "Michael@qq.com", "0412345678", "A1234567", "1234567890", 123);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidSecondName() {
-        new Passenger("John", "Doe!", 30, "Man", "john@example.com", "0412345678", "A1234567", "1234567890", 123);
+        new Passenger("Michael", "Pig!", 30, "Man", "Michael@qq.com", "0412345678", "A1234567", "1234567890", 123);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidAge() {
-        new Passenger("John", "Doe", -1, "Man", "john@example.com", "0412345678", "A1234567", "1234567890", 123);
+        new Passenger("Michael", "Pig", -10, "Man", "Michael@qq.com", "0412345678", "A1234567", "1234567890", 123);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidGender() {
-        new Passenger("John", "Doe", 30, "Invalid", "john@example.com", "0412345678", "A1234567", "1234567890", 123);
+        new Passenger("Michael", "Pig", 30, "Invalid", "Michael@qq.com", "0412345678", "A1234567", "1234567890", 123);
     }
 }

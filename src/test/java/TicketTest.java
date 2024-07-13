@@ -11,10 +11,10 @@ public class TicketTest {
 
     @Before
     public void setUp() {
-        flight = new FlightStub(); // 假设Flight类已经存在
+        flight = new FlightStub(); // 用FlightStub类模拟Flight行为
         passenger = new Passenger();
-        passenger.setFirstName("Jane");
-        passenger.setSecondName("Doe");
+        passenger.setFirstName("Juju");
+        passenger.setSecondName("Bond");
         passenger.setAge(30);
         passenger.setGender("Woman");
     }
