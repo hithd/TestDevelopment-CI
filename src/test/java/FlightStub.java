@@ -1,3 +1,5 @@
+//The author of this module code is Xinghui Huang
+
 public class FlightStub extends Flight {
     private String flightNumber;
     private String departure;

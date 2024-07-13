@@ -1,9 +1,10 @@
+//The author of this module code is Kaihua Tian
 
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.sql.Timestamp;
-//修复build中缺失测试问题
+
 public class TicketCollectionTest {
 
     @Test
