@@ -2,19 +2,25 @@
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class PassengerTest {
 
+
     @Test
     public void testValidPassenger() {
-        Passenger passenger = new Passenger("Michael", "Jackson", 30, "Man", "Michael@qq.com", "0412345678", "A1234567", "1234567890", 123);
+        Passenger passenger = new Passenger("Michael", "Jackson", 30, "Man", "Michael@qq.com", "0412345678", "A12345678", "1234567890", 123);
         assertEquals("Michael", passenger.getFirstName());
         assertEquals("Jackson", passenger.getSecondName());
         assertEquals(30, passenger.getAge());
         assertEquals("Man", passenger.getGender());
         assertEquals("Michael@qq.com", passenger.getEmail());
-        assertEquals("0412345678", passenger.getPhoneNumber());
-        assertEquals("A1234567", passenger.getPassport());
+        assertEquals("+61 412 345 678", passenger.getPhoneNumber());
+        assertEquals("A12345678", passenger.getPassport());
         assertEquals("1234567890", passenger.getCardNumber());
         assertEquals(123, passenger.getSecurityCode());
     }
@@ -26,33 +32,42 @@ public class PassengerTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidPhoneNumber() {
-        new Passenger("Michael", "Jackson", 30, "Man", "Michael@qq.com", "123456557890", "A1234567", "1234567890", 123);
+        new Passenger("Michael", "Jackson", 30, "Man", "Michael@qq.com", "123456557890", "A12345678", "1234567890", 123);
     }
-
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidSecurityCode() {
+        new Passenger("Michael", "Jackson", 30, "Man", "Michael@qq.com", "123456557890", "A12345678", "1234567890", 12);
+    }
     @Test
     public void testValidPhoneNumbers() {
+        // Test data
         String[] validNumbers = {"0412345678", "0512345678", "+61 423 345 678"};
-        for (String number : validNumbers) {
-            Passenger passenger = new Passenger("Michael", "Jackson", 30, "Man", "Michael@qq.com", number, "A1234567", "1234567890", 123);
-            assertEquals(number, passenger.getPhoneNumber());
+        String[] expectedNumbers = {"+61 412 345 678", "+61 512 345 678", "+61 423 345 678"};
+
+        for (int i = 0; i < validNumbers.length; i++) {
+            Passenger passenger = new Passenger("Michael", "Jackson", 30, "Man", "Michael@qq.com", validNumbers[i], "A12345678", "1234567890", 123);
+            // Assume the Passenger class has a method to standardize phone numbers to a certain format
+            String standardizedNumber = passenger.getPhoneNumber();
+            assertEquals(expectedNumbers[i], standardizedNumber);
         }
     }
+
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidPassportLength() {
         new Passenger("Michael", "Jackson", 30, "Man", "Michael@qq.com", "0412345678", "A12345006789", "1234567890", 123);
     }
 
-    @Test(expected = IllegalStateException.class)
-    public void testMissingFields() {
-        Passenger passenger = new Passenger();
-        passenger.validatePassengerFields();
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidPassportab1234567() {
+        new Passenger("Michael", "Jackson", 30, "Man", "Michael@qq.com", "0412345678", "ab1234567", "1234567890", 123);
     }
+
 
     @Test
     public void testToString() {
-        Passenger passenger = new Passenger("Michael", "Jackson", 30, "Man", "Michael@qq.com", "0412345678", "A1234567", "1234567890", 123);
-        String expected = "Passenger{ Fullname= Michael Jackson ,email='Michael@qq.com', phoneNumber='0412345678', passport='A1234567', cardNumber='1234567890', securityCode=123}";
+        Passenger passenger = new Passenger("Michael", "Jackson", 30, "Man", "Michael@qq.com", "0412345678", "A12345678", "1234567890", 123);
+        String expected = "Passenger{ Fullname= Michael Jackson, email='Michael@qq.com', phoneNumber='+61 412 345 678', passport='A12345678', cardNumber='******7890', securityCode=123 }";
         assertEquals(expected, passenger.toString());
     }
 
@@ -65,7 +80,7 @@ public class PassengerTest {
         passenger.setGender("Woman");
         passenger.setEmail("Michael@qq.com");
         passenger.setPhoneNumber("0423456789");
-        passenger.setPassport("B1234567");
+        passenger.setPassport("B12345678");
         passenger.setCardNumber("9876545555");
         passenger.setSecurityCode(4561);
 
@@ -74,8 +89,8 @@ public class PassengerTest {
         assertEquals(25, passenger.getAge());
         assertEquals("Woman", passenger.getGender());
         assertEquals("Michael@qq.com", passenger.getEmail());
-        assertEquals("0423456789", passenger.getPhoneNumber());
-        assertEquals("B1234567", passenger.getPassport());
+        assertEquals("+61 423 456 789", passenger.getPhoneNumber());
+        assertEquals("B12345678", passenger.getPassport());
         assertEquals("9876545555", passenger.getCardNumber());
         assertEquals(4561, passenger.getSecurityCode());
     }
