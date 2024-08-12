@@ -72,7 +72,7 @@ public class TicketTest {
     }
 
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testNullPassenger() {
         ticket = new Ticket(1, 100.0, flight, false, null);
     }
@@ -104,5 +104,58 @@ public class TicketTest {
         assertTrue(result.contains("Price=112.00 KZT"));
         assertTrue(result.contains("Vip status=true"));
         assertTrue(result.contains("Ticket was purchased=False"));
+    }
+    @Test
+    public void testCancelTicket() {
+        ticket = new Ticket(1, 100.0, flight, false, passenger);
+        assertFalse(ticket.cancelTicket()); // 初始状态为未购买，无法取消
+
+        ticket.setTicketStatus(true); // 设置为已购买
+        assertTrue(ticket.cancelTicket()); // 现在可以取消
+        assertFalse(ticket.ticketStatus()); // 确认状态已更改为未购买
+
+        assertFalse(ticket.cancelTicket()); // 再次尝试取消应该失败
+    }
+
+    @Test
+    public void testCalculateRefund() {
+        ticket = new Ticket(1, 100.0, flight, false, passenger);
+        assertEquals(0.0, ticket.calculateRefund(), 0.01); // 未购买状态，退款为0
+
+        ticket.setTicketStatus(true); // 设置为已购买
+        assertEquals(100.8, ticket.calculateRefund(), 0.01); // 退款应为价格的90%（含税价的90%）
+
+        ticket.cancelTicket();
+        assertEquals(0.0, ticket.calculateRefund(), 0.01); // 取消后，退款应为0
+    }
+
+    @Test
+    public void testSetPassengerRecalculatesPrice() {
+        ticket = new Ticket(1, 100.0, flight, false, passenger);
+        assertEquals(112.0, ticket.getPrice(), 0.01); // 初始价格（含税）
+
+        Passenger childPassenger = new Passenger();
+        childPassenger.setAge(10);
+        ticket.setPassenger(childPassenger);
+        assertEquals(56.0, ticket.getPrice(), 0.01); // 儿童价格（50%折扣 + 税）
+
+        Passenger elderPassenger = new Passenger();
+        elderPassenger.setAge(65);
+        ticket.setPassenger(elderPassenger);
+        assertEquals(0.0, ticket.getPrice(), 0.01); // 老年人价格（100%折扣）
+    }
+
+    @Test
+    public void testOriginalPricePreserved() {
+        ticket = new Ticket(1, 100.0, flight, false, passenger);
+        assertEquals(112.0, ticket.getPrice(), 0.01); // 初始价格（含税）
+
+        Passenger childPassenger = new Passenger();
+        childPassenger.setAge(10);
+        ticket.setPassenger(childPassenger);
+        assertEquals(56.0, ticket.getPrice(), 0.01); // 儿童价格
+
+        ticket.setPassenger(passenger); // 设回成年乘客
+        assertEquals(112.0, ticket.getPrice(), 0.01); // 价格应该恢复到原始价格（含税）
     }
 }
