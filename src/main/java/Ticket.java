@@ -54,11 +54,11 @@ public class Ticket {
         applyDiscounts();
     }
 
-    public void setPrice_k(double price) {
-        this.price = price;
-        saleByAge(passenger.getAge());
-        serviceTax();
-    }
+//    public void setPrice_k(double price) {
+//        this.price = price;
+//        saleByAge(passenger.getAge());
+//        serviceTax();
+//    }
     
 //新增，提供统一的价格设定
     private void applyDiscounts() {

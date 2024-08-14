@@ -41,9 +41,9 @@ public class Passenger extends Person {
         this.email = email;
     }
 
-    public void setEmail_k(String email) {
-        this.email = email;
-    }
+//    public void setEmail_k(String email) {
+//        this.email = email;
+//    }
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -56,9 +56,9 @@ public class Passenger extends Person {
         this.phoneNumber = formatPhoneNumber(phoneNumber);// Added phone number formatting
     }
 
-    public void setPhoneNumber_k(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
+//    public void setPhoneNumber_k(String phoneNumber) {
+//        this.phoneNumber = phoneNumber;
+//    }
 
     private String formatPhoneNumber(String phoneNumber) {
         if (phoneNumber.startsWith("+61")) {
@@ -78,9 +78,9 @@ public class Passenger extends Person {
         this.passport = passport;
     }
 
-    public void setPassport_k(String passport) {
-        this.passport = passport;
-    }
+//    public void setPassport_k(String passport) {
+//        this.passport = passport;
+//    }
 
     public String getCardNumber() {
         return cardNumber;
