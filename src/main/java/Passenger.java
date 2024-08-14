@@ -41,6 +41,10 @@ public class Passenger extends Person {
         this.email = email;
     }
 
+    public void setEmail_k(String email) {
+        this.email = email;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -50,6 +54,10 @@ public class Passenger extends Person {
             throw new IllegalArgumentException("Invalid phone number format. It should start with 04 or 05 and have 8 digits, or be in international format (+61 4xx xxx xxx).");
         }
         this.phoneNumber = formatPhoneNumber(phoneNumber);// Added phone number formatting
+    }
+
+    public void setPhoneNumber_k(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     private String formatPhoneNumber(String phoneNumber) {
@@ -67,6 +75,10 @@ public class Passenger extends Person {
         if (passport == null || !PASSPORT_PATTERN.matcher(passport).matches()) {
             throw new IllegalArgumentException("Invalid passport number. It should be 9 characters long and contain only uppercase letters and numbers.");
         }
+        this.passport = passport;
+    }
+
+    public void setPassport_k(String passport) {
         this.passport = passport;
     }
 
