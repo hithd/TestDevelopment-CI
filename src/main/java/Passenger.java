@@ -27,7 +27,7 @@ public class Passenger extends Person {
         setPassport(passport);
         setCardNumber(cardNumber);
         setSecurityCode(securityCode);
-        validatePassengerFields();
+
     }
 
     public String getEmail() {
@@ -104,24 +104,14 @@ public class Passenger extends Person {
         this.securityCode = securityCode;
     }
 
-    public List<String> validateAllFields() {
-        List<String> errors = new ArrayList<>();
-        try {
-            validatePassengerFields();
-        } catch (IllegalStateException e) {
-            for (String error : e.getMessage().split(",")) {
-                errors.add(error.trim());
-            }
-        }
-        return errors;
-    }
+
     // Added method to return list of validation errors
 
     public void validatePassengerFields() {
         StringBuilder errorMessage = new StringBuilder();
         if (getFirstName() == null || getFirstName().isEmpty()) errorMessage.append("First name is required, ");
         if (getSecondName() == null || getSecondName().isEmpty()) errorMessage.append("Second name is required, ");
-        if (getAge() < 0) errorMessage.append("Age must be non-negative, ");
+        if (getAge()< 0 ) errorMessage.append("Age must be non-negative, ");
         if (getGender() == null || getGender().isEmpty()) errorMessage.append("Gender is required, ");
         if (email == null || email.isEmpty()) errorMessage.append("Email is required, ");
         if (phoneNumber == null || phoneNumber.isEmpty()) errorMessage.append("Phone number is required, ");
@@ -129,7 +119,7 @@ public class Passenger extends Person {
         if (cardNumber == null || cardNumber.isEmpty()) errorMessage.append("Card number is required, ");
 
         if (errorMessage.length() > 0) {
-            errorMessage.setLength(errorMessage.length() - 2);  // Remove last comma and space
+
             throw new IllegalStateException(errorMessage.toString());
         }
     }
@@ -150,8 +140,8 @@ public class Passenger extends Person {
 
     private String maskCardNumber(String cardNumber) {
         // Added method to mask card number
-        if (cardNumber == null || cardNumber.length() <= 4) {
-            return cardNumber;
+        if (cardNumber == null || cardNumber.length() < 4) {
+            throw new IllegalArgumentException("cardNumber must be beyond 4 digits.");
         }
         return "*".repeat(cardNumber.length() - 4) + cardNumber.substring(cardNumber.length() - 4);
     }
