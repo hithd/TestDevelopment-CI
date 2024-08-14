@@ -53,7 +53,6 @@ public class TicketSystem<T> {
     }
 
     public boolean validateCity(String city) {
-        // You can add more city validation logic here, e.g., check against a list of valid cities.
         return city != null && !city.isEmpty();
     }
 
