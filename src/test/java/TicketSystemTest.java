@@ -367,19 +367,19 @@ public class TicketSystemTest {
     }
 
 
-    // @Test
-    // public void testTicketWithInvalidID() {
-    //     ticket.setTicketId(-1);
-    //     boolean isValid = ticketSystem.validateTicket(ticket);
-    //     assertFalse(isValid);
-    // }
+    @Test
+    public void testTicketWithInvalidID() {
+        ticket.setTicketId(-1);
+        boolean isValid = ticketSystem.validateTicket(ticket);
+        assertFalse(isValid);
+    }
 
-    // @Test
-    // public void testTicketWithZeroID() {
-    //     ticket.setTicketId(0);
-    //     boolean isValid = ticketSystem.validateTicket(ticket);
-    //     assertFalse(isValid);
-    // }
+    @Test
+    public void testTicketWithZeroID() {
+        ticket.setTicketId(0);
+        boolean isValid = ticketSystem.validateTicket(ticket);
+        assertFalse(isValid);
+    }
 
     @Test
     public void testTicketWithNegativePrice() {
