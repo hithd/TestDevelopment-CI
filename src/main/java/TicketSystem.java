@@ -1,7 +1,5 @@
 //The author of this module code is Kaihua Tian
 
-package org.example;
-
 import java.util.Scanner;
 
 public class TicketSystem<T> {
