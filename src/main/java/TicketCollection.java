@@ -17,14 +17,10 @@ public class TicketCollection {
         }
     }
 
-    public static void getAllTickets() {
-        // display all available tickets from the Ticket collection
-    }
-
     public static Ticket getTicketInfo(int ticket_id) {
         // SELECT a ticket where ticket id = ticket_id
         for (Ticket ticket : tickets) {
-            if (ticket.getTicketId() == ticket_id) {
+            if (ticket.getTicket_id() == ticket_id) {
                 return ticket;
             }
         }
