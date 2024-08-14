@@ -134,10 +134,9 @@ public class Ticket {
         return ticketId;
     }
 
-    public int getTicketId() {
+    public int getTicket_idk() {
         return ticketId;
     }
-
     public void setTicketId(int ticketId) {
         this.ticketId = ticketId;
     }
