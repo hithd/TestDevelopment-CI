@@ -32,7 +32,7 @@ public class TicketCollection {
             return false;
         }
         for (Ticket t : tickets) {
-            if (t.getTicketId() == ticket.getTicketId()) {
+            if (t.getTicket_id() == ticket.getTicket_id()) {
                 return false; // Ticket with the same ID already exists
             }
         }
