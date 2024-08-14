@@ -1,5 +1,8 @@
+//<<<<<<< Feiji
+//=======
 //The author of this module code is Jianxin Zhou
 
+//>>>>>>> main
 public class Airplane {
     private int airplaneID;
     private String airplaneModel;
@@ -33,7 +36,7 @@ public class Airplane {
     }
 
     public void setAirplaneModel(String airplaneModel) {
-        if (!airplaneModel.equals("Boeing 737") && !airplaneModel.equals("Boeing 747") && !airplaneModel.equals("Airbus A320")) {
+        if (!airplaneModel.equals("Boeing 737") && !airplaneModel.equals("Boeing 747") && !airplaneModel.equals("Airbus A320") && !airplaneModel.equals("Airbus A380") && !airplaneModel.equals("Boeing 777")) {
             throw new IllegalArgumentException("Invalid Airplane model.");
         }
         this.airplaneModel = airplaneModel;
@@ -66,10 +69,16 @@ public class Airplane {
     }
 
     public void setCrewSitsNumber(int crewSitsNumber) {
-        if (crewSitsNumber < 1 || crewSitsNumber > 300) {
-            throw new IllegalArgumentException("Crew seats number must be in the range [1, 300].");
+        int maxCrewSeats = Math.max(1, (int) ((businessSitsNumber + economySitsNumber) * 0.1)); // 保证至少有1个机组人员座位
+        if (crewSitsNumber < 1 || crewSitsNumber > maxCrewSeats) {
+            throw new IllegalArgumentException("Crew seats number must be in the range [1, " + maxCrewSeats + "].");
         }
         this.crewSitsNumber = crewSitsNumber;
+    }
+
+
+    public int getTotalSeatsNumber() {
+        return businessSitsNumber + economySitsNumber + crewSitsNumber;
     }
 
     @Override
@@ -80,20 +89,25 @@ public class Airplane {
                 ", business sits=" + getBusinessSitsNumber() +
                 ", economy sits=" + getEconomySitsNumber() +
                 ", crew sits=" + getCrewSitsNumber() +
+                ", total sits=" + getTotalSeatsNumber() +
                 '}';
     }
 
     public static Airplane getAirPlaneInfo(int airplaneID) {
-        // This method should be implemented to fetch airplane information based on airplaneID.
-        // For example, you can fetch this information from a database or a collection.
-        // Here is a mock implementation:
-//        if (airplaneID == 1) {
-//            return new Airplane(1, "Boeing 737", 20, 150, 10);
-//        } else if (airplaneID == 2) {
-//            return new Airplane(2, "Airbus A320", 25, 160, 12);
-//        }
-//        // Return null or throw an exception if airplaneID is not found
-//        throw new IllegalArgumentException("Airplane with ID " + airplaneID + " not found.");
-        return null;
+        // 这个方法应实现基于airplaneID获取飞机信息的功能。这里是一个模拟实现。
+        switch (airplaneID) {
+            case 1:
+                return new Airplane(1, "Boeing 737", 20, 150, 15);
+            case 2:
+                return new Airplane(2, "Airbus A320", 25, 160, 16);
+            case 3:
+                return new Airplane(3, "Boeing 747", 30, 180, 18);
+            case 4:
+                return new Airplane(4, "Airbus A380", 50, 200, 25);
+            case 5:
+                return new Airplane(5, "Boeing 777", 35, 170, 20);
+            default:
+                throw new IllegalArgumentException("Airplane with ID " + airplaneID + " not found.");
+        }
     }
 }
