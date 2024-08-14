@@ -45,7 +45,7 @@ public class TicketSystem<T> {
     }
 
     public boolean validateTicket(Ticket ticket) {
-        if (ticket.getTicket_id() <= 0) return false;
+        if (ticket.getTicketId() <= 0) return false;
         if (ticket.getPrice() <= 0) return false;
         if (ticket.getFlight() == null || !validateFlight(ticket.getFlight())) return false;
         if (ticket.getPassenger() == null || !validatePassenger(ticket.getPassenger())) return false;
