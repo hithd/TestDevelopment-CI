@@ -1,3 +1,8 @@
+//<<<<<<< Feiji
+//=======
+//The author of this module code is Jianxin Zhou
+
+//>>>>>>> main
 public class Airplane {
     private int airplaneID;
     private String airplaneModel;
