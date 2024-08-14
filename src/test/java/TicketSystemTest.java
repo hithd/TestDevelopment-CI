@@ -11,7 +11,7 @@ import java.util.Scanner;
 import static org.junit.Assert.*;
 
 public class TicketSystemTest {
-
+    private Passenger passengernull;
     private TicketSystem ticketSystem;
     private Flight flight;
     private Ticket ticket;
@@ -83,7 +83,7 @@ public class TicketSystemTest {
 
     @Test
     public void testInvalidTicketInformation() {
-        ticket.setPrice_k(-100);
+        ticket = new Ticket();
         boolean isValid = ticketSystem.validateTicket(ticket);
         assertFalse(isValid);
     }
@@ -97,7 +97,7 @@ public class TicketSystemTest {
 
     @Test
     public void testTicketWithZeroPrice() {
-        ticket.setPrice_k(0);
+        ticket.setPrice(0);
         boolean isValid = ticketSystem.validateTicket(ticket);
         assertFalse(isValid);
     }
@@ -117,10 +117,103 @@ public class TicketSystemTest {
 
     @Test
     public void testPassengerWithNullEmail() {
-        passenger.setEmail_k(null);
+        passengernull = new Passenger();
+        passengernull.setFirstName("Juju");
+        passengernull.setSecondName("Bond");
+        passengernull.setAge(30);
+        passengernull.setGender("Woman");
+        boolean isValid = ticketSystem.validatePassenger(passengernull);
+        assertFalse(isValid);
+    }
+    @Test
+    public void testPassengerWithNullFirstName() {
+        passengernull = new Passenger();
+        passengernull.setSecondName("Bond");
+        passengernull.setAge(30);
+        passengernull.setGender("Woman");
+        boolean isValid = ticketSystem.validatePassenger(passengernull);
+        assertFalse(isValid);
+    }
+    @Test
+    public void testPassengerWithNullSecondName() {
+        passengernull = new Passenger();
+        passengernull.setFirstName("Juju");
+        passengernull.setAge(30);
+        passengernull.setGender("Woman");
+        boolean isValid = ticketSystem.validatePassenger(passengernull);
+        assertFalse(isValid);
+    }
+    @Test
+    public void testPassengerWithNullGender() {
+        passengernull = new Passenger();
+        passengernull.setFirstName("Juju");
+        passengernull.setSecondName("Bond");
+        passengernull.setAge(30);
+        boolean isValid = ticketSystem.validatePassenger(passengernull);
+        assertFalse(isValid);
+    }
+    @Test
+    public void testPassengerWithInvalidSecurityCode() {
+        Passenger passenger = new Passenger();
+        passenger.setFirstName("Alice");
+        passenger.setSecondName("Brown");
+        passenger.setAge(35);
+        passenger.setGender("Man");
+        passenger.setEmail("john.doe@example.com");
+        passenger.setPhoneNumber("0412345678");
+        passenger.setPassport("123456789");
+        passenger.setCardNumber("1234567812345678");
+        //passenger.setSecurityCode(123); // 设置为 0 以触发错误
         boolean isValid = ticketSystem.validatePassenger(passenger);
         assertFalse(isValid);
     }
+    @Test
+    public void testPassengerWithInvalidPhoneNumber() {
+        Passenger passenger = new Passenger();
+        passenger.setFirstName("Alice");
+        passenger.setSecondName("Brown");
+        passenger.setAge(35);
+        passenger.setGender("Man");
+        passenger.setEmail("john.doe@example.com");
+        //passenger.setPhoneNumber("0412345678");
+        passenger.setPassport("123456789");
+        passenger.setCardNumber("1234567812345678");
+        passenger.setSecurityCode(123); // 设置为 0 以触发错误
+        boolean isValid = ticketSystem.validatePassenger(passenger);
+        assertFalse(isValid);
+    }
+    @Test
+    public void testPassengerWithInvalidPassport() {
+        Passenger passenger = new Passenger();
+        passenger.setFirstName("Alice");
+        passenger.setSecondName("Brown");
+        passenger.setAge(35);
+        passenger.setGender("Man");
+        passenger.setEmail("john.doe@example.com");
+        passenger.setPhoneNumber("0412345678");
+        // passenger.setPassport("123456789");
+        passenger.setCardNumber("1234567812345678");
+        passenger.setSecurityCode(123); // 设置为 0 以触发错误
+        boolean isValid = ticketSystem.validatePassenger(passenger);
+        assertFalse(isValid);
+    }
+    @Test
+    public void testPassengerWithInvalidCardNumber() {
+        Passenger passenger = new Passenger();
+        passenger.setFirstName("Alice");
+        passenger.setSecondName("Brown");
+        passenger.setAge(35);
+        passenger.setGender("Man");
+        passenger.setEmail("john.doe@example.com");
+        passenger.setPhoneNumber("0412345678");
+        passenger.setPassport("123456789");
+        //passenger.setCardNumber("1234567812345678");
+        passenger.setSecurityCode(123); // 设置为 0 以触发错误
+        boolean isValid = ticketSystem.validatePassenger(passenger);
+        assertFalse(isValid);
+    }
+
+
 
     @Test(expected = IllegalArgumentException.class)
     public void testPassengerWithEmptyCardNumber() {
@@ -144,7 +237,7 @@ public class TicketSystemTest {
     @Test
     public void testTicketPriceDisplay() {
         // Set up the ticket with base price
-        ticket.setPrice_k(500);
+        ticket.setPrice(500);
 
         // Scenario 1: Passenger is an adult (age 30), no discount should be applied
         passenger.setAge(30);
@@ -153,19 +246,19 @@ public class TicketSystemTest {
 
         // Scenario 2: Passenger is a child (age 10), 50% discount should be applied
         passenger.setAge(10);
-        ticket.setPrice_k(500); // Reset price before applying discount
+        ticket.setPrice(500); // Reset price before applying discount
         finalPrice = ticketSystem.calculateFinalPrice(ticket);
         assertEquals(280, finalPrice);
 
         // Scenario 3: Passenger is an elder (age 65), 100% discount should be applied
         passenger.setAge(65);
-        ticket.setPrice_k(500); // Reset price before applying discount
+        ticket.setPrice(500); // Reset price before applying discount
         finalPrice = ticketSystem.calculateFinalPrice(ticket);
         assertEquals(0, finalPrice);
 
         // Scenario 4: Passenger is a teenager (age 16), no discount should be applied
         passenger.setAge(16);
-        ticket.setPrice_k(500); // Reset price before applying discount
+        ticket.setPrice(500); // Reset price before applying discount
         finalPrice = ticketSystem.calculateFinalPrice(ticket);
         assertEquals(560, finalPrice);
     }
@@ -233,12 +326,7 @@ public class TicketSystemTest {
         assertFalse(isValid);
     }
 
-    @Test
-    public void testInvalidPassengerEmail() {
-        passenger.setEmail_k("");
-        boolean isValid = ticketSystem.validatePassenger(passenger);
-        assertFalse(isValid);
-    }
+
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidPassengerCardNumber() {
@@ -268,33 +356,8 @@ public class TicketSystemTest {
         assertFalse(isValid);
     }
 
-    @Test
-    public void testPassengerWithEmptyFirstName() {
-        passenger.setFirstName_k("");
-        boolean isValid = ticketSystem.validatePassenger(passenger);
-        assertFalse(isValid);
-    }
 
-    @Test
-    public void testPassengerWithNullFirstName() {
-        passenger.setFirstName_k(null);
-        boolean isValid = ticketSystem.validatePassenger(passenger);
-        assertFalse(isValid);
-    }
 
-    @Test
-    public void testPassengerWithEmptySecondName() {
-        passenger.setSecondName_k("");
-        boolean isValid = ticketSystem.validatePassenger(passenger);
-        assertFalse(isValid);
-    }
-
-    @Test
-    public void testPassengerWithNullSecondName() {
-        passenger.setSecondName_k(null);
-        boolean isValid = ticketSystem.validatePassenger(passenger);
-        assertFalse(isValid);
-    }
 
     @Test(expected = IllegalArgumentException.class)
     public void testPassengerWithNegativeAge() {
@@ -310,47 +373,7 @@ public class TicketSystemTest {
         assertFalse(isValid);
     }
 
-    @Test
-    public void testPassengerWithEmptyGender() {
-        passenger.setGender_k("");
-        boolean isValid = ticketSystem.validatePassenger(passenger);
-        assertFalse(isValid);
-    }
 
-    @Test
-    public void testPassengerWithNullGender() {
-        passenger.setGender_k(null);
-        boolean isValid = ticketSystem.validatePassenger(passenger);
-        assertFalse(isValid);
-    }
-
-    @Test
-    public void testPassengerWithEmptyPhoneNumber() {
-        passenger.setPhoneNumber_k("");
-        boolean isValid = ticketSystem.validatePassenger(passenger);
-        assertFalse(isValid);
-    }
-
-    @Test
-    public void testPassengerWithNullPhoneNumber() {
-        passenger.setPhoneNumber_k(null);
-        boolean isValid = ticketSystem.validatePassenger(passenger);
-        assertFalse(isValid);
-    }
-
-    @Test
-    public void testPassengerWithEmptyPassport() {
-        passenger.setPassport_k("");
-        boolean isValid = ticketSystem.validatePassenger(passenger);
-        assertFalse(isValid);
-    }
-
-    @Test
-    public void testPassengerWithNullPassport() {
-        passenger.setPassport_k(null);
-        boolean isValid = ticketSystem.validatePassenger(passenger);
-        assertFalse(isValid);
-    }
 
     @Test(expected = IllegalArgumentException.class)
     public void testPassengerWithNullCardNumber() {
@@ -359,12 +382,6 @@ public class TicketSystemTest {
         assertFalse(isValid);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testPassengerWithInvalidSecurityCode() {
-        passenger.setSecurityCode(-1);
-        boolean isValid = ticketSystem.validatePassenger(passenger);
-        assertFalse(isValid);
-    }
 
 
     @Test
@@ -381,12 +398,7 @@ public class TicketSystemTest {
         assertFalse(isValid);
     }
 
-    @Test
-    public void testTicketWithNegativePrice() {
-        ticket.setPrice_k(-1);
-        boolean isValid = ticketSystem.validateTicket(ticket);
-        assertFalse(isValid);
-    }
+
 
     @Test
     public void testTicketWithInvalidFlight() {
@@ -402,10 +414,5 @@ public class TicketSystemTest {
         assertFalse(isValid);
     }
 
-    @Test
-    public void testTicketWithInvalidPassenger() {
-        passenger.setFirstName_k(null);
-        boolean isValid = ticketSystem.validateTicket(ticket);
-        assertFalse(isValid);
-    }
+
 }

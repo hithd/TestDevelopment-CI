@@ -110,6 +110,24 @@ public class TicketTest {
         assertTrue(ticket.ticketStatus());
         assertEquals(passenger, ticket.getPassenger());
     }
+    @Test
+    public void testSettersAndGettersWithId() {
+        ticket = new Ticket();
+        ticket.setPassenger(passenger);
+        ticket.setTicketId(2);
+        ticket.setPrice(200.0);
+        ticket.setFlight(flight);
+        ticket.setClassVip(true);
+        ticket.setTicketStatus(true);
+        ticket.setPassenger(passenger);
+
+        assertEquals(2, ticket.getTicket_id());
+        assertEquals(224.0, ticket.getPrice(), 0.01); // 200 + 12% tax
+
+        assertTrue(ticket.getClassVip());
+        assertTrue(ticket.ticketStatus());
+        assertEquals(passenger, ticket.getPassenger());
+    }
     //新增ClassVip False判断
     @Test
     public void testClassVipFalse() {

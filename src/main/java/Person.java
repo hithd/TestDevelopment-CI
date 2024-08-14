@@ -47,9 +47,9 @@ public abstract class Person {
         this.gender = gender.trim();
     }
 
-    public void setGender_k(String gender) {
-        this.gender = gender;
-    }
+//    public void setGender_k(String gender) {
+//        this.gender = gender;
+//    }
 
     public String getFirstName() {
         return firstName;
@@ -76,17 +76,17 @@ public abstract class Person {
         }
     }
 
-    public void setFirstName_k(String firstName) {
-        validateName_k(firstName);
-        this.firstName = firstName;
-    }
+//    public void setFirstName_k(String firstName) {
+//        validateName_k(firstName);
+//        this.firstName = firstName;
+//    }
 
-    public void setSecondName_k(String secondName) {
-        validateName_k(secondName);
-        this.secondName = secondName;
-    }
+//    public void setSecondName_k(String secondName) {
+//        validateName_k(secondName);
+//        this.secondName = secondName;
+//    }
 
-    private void validateName_k(String name) {}
+//    private void validateName_k(String name) {}
     
     public void validatePersonFields() {
         // 改进：使用 String.format 提高可读性和性能
