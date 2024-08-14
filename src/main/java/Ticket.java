@@ -230,7 +230,7 @@ public class Ticket {
                 "Price=" + String.format("%.2f", getPrice()) + " KZT, " + '\n' +
                 (flight != null ? flight.toString() : "No flight assigned") + '\n' +
                 "Vip status=" + getClassVip() + '\n' +
-                (passenger != null ? passenger.toString() : "No passenger assigned") + '\n' +
+                passenger.toString() + '\n' +
                 "Ticket was purchased=" + getExplicitStatus() + "\n}";
     }
 }

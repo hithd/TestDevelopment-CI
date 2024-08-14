@@ -8,7 +8,7 @@ import java.util.Objects;// 新增：用于 equals 和 hashCode 方法
 public abstract class Person {
     private String firstName;
     private String secondName;
-    private int age;
+    private Integer  age;
     private String gender;
     private static final Set<String> VALID_GENDERS = new HashSet<>(Arrays.asList(
             "Woman", "Man", "Non-binary | gender diverse", "Prefer not to say", "Other"
@@ -27,7 +27,7 @@ public abstract class Person {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         // 改进：添加上限检查，增强数据有效性验证
         if (age < 0 || age > 150) {
             throw new IllegalArgumentException("Age must be between 0 and 150.");
@@ -73,7 +73,7 @@ public abstract class Person {
     }
     public void validatePersonFields() {
         // 改进：使用 String.format 提高可读性和性能
-        if (firstName == null || secondName == null || age < 0 || gender == null) {
+        if (firstName == null || secondName == null || age == null || gender == null) {
             throw new IllegalStateException("All fields must be set before using the object.");
         }
     }

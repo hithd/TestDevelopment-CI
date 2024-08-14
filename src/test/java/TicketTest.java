@@ -17,6 +17,8 @@ public class TicketTest {
         passenger.setSecondName("Bond");
         passenger.setAge(30);
         passenger.setGender("Woman");
+        passenger.setCardNumber("1234567890123456");
+
     }
 
     @Test
@@ -33,10 +35,22 @@ public class TicketTest {
         ticket = new Ticket(1, 100.0, flight, false, passenger);
         assertEquals(56.0, ticket.getPrice(), 0.01); // 50% discount + 12% tax
     }
-
+    //新增年龄边际判断
+    @Test
+    public void testDiscountDownBoundary() {
+        passenger.setAge(15);
+        ticket = new Ticket(1, 100.0, flight, false, passenger);
+        assertEquals(112, ticket.getPrice(), 0.01); // 50% discount + 12% tax
+    }
+    @Test
+    public void testDiscountUpBoundary() {
+        passenger.setAge(59);
+        ticket = new Ticket(1, 100.0, flight, false, passenger);
+        assertEquals(112, ticket.getPrice(), 0.01); // 50% discount + 12% tax
+    }
     @Test
     public void testDiscountForElders() {
-        passenger.setAge(65);
+        passenger.setAge(60);
         ticket = new Ticket(1, 100.0, flight, false, passenger);
         assertEquals(0.0, ticket.getPrice(), 0.01);
     }
@@ -96,7 +110,25 @@ public class TicketTest {
         assertTrue(ticket.ticketStatus());
         assertEquals(passenger, ticket.getPassenger());
     }
+    //新增ClassVip False判断
+    @Test
+    public void testClassVipFalse() {
+        ticket = new Ticket();
+        ticket.setPassenger(passenger);
+        ticket.setTicket_id(2);
+        ticket.setPrice(200.0);
+        ticket.setFlight(flight);
+        ticket.setClassVip(false);
+        ticket.setTicketStatus(true);
+        ticket.setPassenger(passenger);
 
+        assertEquals(2, ticket.getTicket_id());
+        assertEquals(224.0, ticket.getPrice(), 0.01); // 200 + 12% tax
+
+        assertFalse(ticket.getClassVip());
+        assertTrue(ticket.ticketStatus());
+        assertEquals(passenger, ticket.getPassenger());
+    }
     @Test
     public void testToString() {
         ticket = new Ticket(1, 100.0, flight, true, passenger);
@@ -105,6 +137,18 @@ public class TicketTest {
         assertTrue(result.contains("Vip status=true"));
         assertTrue(result.contains("Ticket was purchased=False"));
     }
+    //新增null判定
+    @Test
+    public void testToStringWithNoFlight() {
+        ticket = new Ticket(1, 100.0, null, true, passenger);
+        String result = ticket.toString();
+
+        assertTrue(result.contains("Price=112.00 KZT"));
+        assertTrue(result.contains("No flight assigned"));
+        assertTrue(result.contains("Vip status=true"));
+        assertFalse(result.contains("No passenger assigned"));
+    }
+
     @Test
     public void testCancelTicket() {
         ticket = new Ticket(1, 100.0, flight, false, passenger);
