@@ -1,7 +1,4 @@
 //The author of this module code is Kaihua Tian
-
-package org.example;
-
 import java.util.ArrayList;
 
 public class TicketCollection {
