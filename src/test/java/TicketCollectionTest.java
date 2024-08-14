@@ -1,8 +1,9 @@
 //The author of this module code is Kaihua Tian
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.sql.Timestamp;
 
 public class TicketCollectionTest {
@@ -10,8 +11,8 @@ public class TicketCollectionTest {
     @Test
     public void testAddTickets() {
         ArrayList<Ticket> tickets_db = new ArrayList<>();
-        Passenger passenger1 = new Passenger("Kah", "Ronaldo", 30, "Man", "Kah.Ronaldo@example.com", "0512345678", "P12345", "1234567890123456", 123);
-        Passenger passenger2 = new Passenger("Yossy", "Leo", 12, "Woman", "Yossy.Leo@example.com", "0587654321", "P54321", "6543210987654321", 321);
+        Passenger passenger1 = new Passenger("John", "Doe", 30, "Man", "john.doe@example.com", "0512345678", "P12345", "1234567890123456", 123);
+        Passenger passenger2 = new Passenger("Jane", "Smith", 12, "Woman", "jane.smith@example.com", "0587654321", "P54321", "6543210987654321", 321);
 
         Timestamp dateFrom = new Timestamp(System.currentTimeMillis());
         Timestamp dateTo = new Timestamp(System.currentTimeMillis() + 3600 * 1000);
@@ -31,8 +32,30 @@ public class TicketCollectionTest {
     }
 
     @Test
+    public void testAddEmptyTicketList() {
+        int initialSize = TicketCollection.getTickets().size();
+        TicketCollection.addTickets(new ArrayList<>());
+        assertEquals(initialSize, TicketCollection.getTickets().size());
+    }
+
+    @Test
+    public void testAddTicketWithDuplicateId() {
+        Passenger passenger = new Passenger("Jane", "Doe", 25, "Woman", "jane.doe@example.com", "0598765432", "P67890", "9876543210987654", 456);
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        Airplane airplane = new Airplane(1, "Airbus A320", 8, 160, 4);
+        Flight flight = new Flight(2, "Los Angeles", "New York", "XYZ456", "American", now, new Timestamp(now.getTime() + 5000 * 1000), airplane);
+        Ticket newTicket = new Ticket(1, 1200, flight, true, passenger); // Same ID as an existing ticket
+
+        ArrayList<Ticket> tickets_db = new ArrayList<>();
+        tickets_db.add(newTicket);
+
+        TicketCollection.addTickets(tickets_db);
+        assertEquals(2, TicketCollection.getTickets().size());
+    }
+
+    @Test
     public void testGetTicketInfo() {
-        Passenger passenger1 = new Passenger("Kah", "Ronaldo", 30, "Man", "Kah.Ronaldo@example.com", "0412345678", "P12345", "1234567890123456", 123);
+        Passenger passenger1 = new Passenger("John", "Doe", 30, "Man", "john.doe@example.com", "0412345678", "P12345", "1234567890123456", 123);
 
         Timestamp dateFrom = new Timestamp(System.currentTimeMillis());
         Timestamp dateTo = new Timestamp(System.currentTimeMillis() + 3600 * 1000);
@@ -53,8 +76,7 @@ public class TicketCollectionTest {
 
     @Test
     public void testValidateTicket() {
-
-        Passenger passenger1 = new Passenger("Kah", "Ronaldo", 30, "Man", "Kah.Ronaldo@example.com", "0412345678", "P12345", "1234567890123456", 123);
+        Passenger passenger1 = new Passenger("John", "Doe", 30, "Man", "john.doe@example.com", "0412345678", "P12345", "1234567890123456", 123);
 
         Timestamp dateFrom = new Timestamp(System.currentTimeMillis());
         Timestamp dateTo = new Timestamp(System.currentTimeMillis() + 3600 * 1000);
