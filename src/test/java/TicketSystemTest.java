@@ -122,7 +122,7 @@ public class TicketSystemTest {
         assertFalse(isValid);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testPassengerWithEmptyCardNumber() {
         passenger.setCardNumber("");
         boolean isValid = ticketSystem.validatePassenger(passenger);
@@ -240,14 +240,14 @@ public class TicketSystemTest {
         assertFalse(isValid);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testInvalidPassengerCardNumber() {
         passenger.setCardNumber("");
         boolean isValid = ticketSystem.validatePassenger(passenger);
         assertFalse(isValid);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testInvalidPassengerSecurityCode() {
         passenger.setSecurityCode(0);
         boolean isValid = ticketSystem.validatePassenger(passenger);
@@ -296,7 +296,7 @@ public class TicketSystemTest {
         assertFalse(isValid);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testPassengerWithNegativeAge() {
         passenger.setAge(-1);
         boolean isValid = ticketSystem.validatePassenger(passenger);
@@ -352,14 +352,14 @@ public class TicketSystemTest {
         assertFalse(isValid);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testPassengerWithNullCardNumber() {
         passenger.setCardNumber(null);
         boolean isValid = ticketSystem.validatePassenger(passenger);
         assertFalse(isValid);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testPassengerWithInvalidSecurityCode() {
         passenger.setSecurityCode(-1);
         boolean isValid = ticketSystem.validatePassenger(passenger);
