@@ -47,6 +47,10 @@ public abstract class Person {
         this.gender = gender.trim();
     }
 
+    public void setGender_k(String gender) {
+        this.gender = gender;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -71,6 +75,19 @@ public abstract class Person {
             throw new IllegalArgumentException(fieldName + " must contain only alphabetic characters, spaces, hyphens, apostrophes, or periods, and cannot be empty.");
         }
     }
+
+    public void setFirstName_k(String firstName) {
+        validateName_k(firstName);
+        this.firstName = firstName;
+    }
+
+    public void setSecondName_k(String secondName) {
+        validateName_k(secondName);
+        this.secondName = secondName;
+    }
+
+    private void validateName_k(String name) {}
+    
     public void validatePersonFields() {
         // 改进：使用 String.format 提高可读性和性能
         if (firstName == null || secondName == null || age < 0 || gender == null) {
