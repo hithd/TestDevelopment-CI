@@ -134,7 +134,7 @@ public class Ticket {
         return ticketId;
     }
 
-    public int getTicket_id() {
+    public int getTicketId() {
         return ticketId;
     }
 
