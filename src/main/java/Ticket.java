@@ -134,6 +134,10 @@ public class Ticket {
         return ticketId;
     }
 
+    public void setTicketId(int ticketId) {
+        this.ticketId = ticketId;
+    }
+
     public void setTicket_id(int ticketId) {
         this.ticketId = ticketId;
     }
@@ -150,6 +154,13 @@ public class Ticket {
         this.price = price;
         applyDiscounts();
     }
+
+    public void setPrice_k(double price) {
+        this.price = price;
+        saleByAge(passenger.getAge());
+        serviceTax();
+    }
+    
 //新增，提供统一的价格设定
     private void applyDiscounts() {
         if (passenger != null) {
