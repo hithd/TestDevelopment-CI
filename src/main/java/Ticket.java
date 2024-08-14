@@ -27,9 +27,7 @@ public class Ticket {
         // Default constructor
     }
 
-    public int getTicket_id() {
-        return ticketId;
-    }
+
 
     public int getTicket_id() {
         return ticketId;
