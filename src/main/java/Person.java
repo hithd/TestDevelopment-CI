@@ -47,6 +47,10 @@ public abstract class Person {
         this.gender = gender.trim();
     }
 
+    public void setGender_k(String gender) {
+        this.gender = gender;
+    }
+
     public String getFirstName() {
         return firstName;
     }
